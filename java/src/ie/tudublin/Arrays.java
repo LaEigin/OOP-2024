@@ -28,10 +28,9 @@ public class Arrays extends PApplet
 
 	public void settings()
 	{
-		size(500, 500);
+		size(800, 800);
 
 		String[] m1 = months;
-		months[0] = "XXX";
 		print(m1[0]);
 		for(int i = 0; i < months.length; i ++)
 		{
@@ -85,8 +84,8 @@ public class Arrays extends PApplet
 	}
 
 	public void setup() {
-		colorMode(HSB);
-		background(0);
+		colorMode(RGB);
+		background(255,255,255);
 		randomize();
 		
 		
@@ -97,11 +96,16 @@ public class Arrays extends PApplet
 	{	
 
 		background(0);
-		float w = width / (float)months.length;
+		float w = width / (float)months.length - 5;
 		for(int i = 0 ; i < months.length ;  i ++)
 		{
+			stroke(255,100,100);
+			text(months[i], 65+60*i, height-10);
+
 			float x = map1(i, 0, months.length, 0, width);
-			rect(x, height, w, -rainfall[i]);
+			colorMode(HSB);
+			fill(25*i, 25*i, 25*i);
+			rect(50+60*i, height-50, w, -rainfall[i]);
 		}
 	}
 }
