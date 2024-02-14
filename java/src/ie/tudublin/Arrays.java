@@ -99,11 +99,16 @@ public class Arrays extends PApplet
 		float w = width / (float)months.length - 5;
 		for(int i = 0 ; i < months.length ;  i ++)
 		{
-			stroke(255,100,100);
-			text(months[i], 65+60*i, height-10);
+			fill(255, 255, 255);
+			stroke(255,255,255);
 
-			float x = map1(i, 0, months.length, 0, width);
-			colorMode(HSB);
+			text(months[i], 65+60*i, height-10);
+			line(50, height-50, 50, 50);
+			text(10*i, 25, height - (i*(58) - 58));
+			line(45, height - (i*(58) - 58) , 50, height - (i*(58) - 58));
+		}
+
+		for (int i = 0; i < months.length; i++) {
 			fill(25*i, 25*i, 25*i);
 			rect(50+60*i, height-50, w, -rainfall[i]);
 		}
