@@ -105,6 +105,25 @@ public class Arrays extends PApplet
 	{	
 		switch (mode) {
 			case 0:
+				background(0);
+				float w = width / (float)months.length - 5;
+				for(int i = 0 ; i < months.length ;  i ++)
+				{
+					fill(255, 255, 255);
+					stroke(255,255,255);
+		
+					text(months[i], 65+60*i, height-10);
+					line(50, height-50, 50, 50);
+					text(10*i, 25, height - (i*(58) - 58));
+					line(45, height - (i*(58) - 58) , 50, height - (i*(58) - 58));
+				}
+
+
+				for (int i = 0; i < months.length; i++) {
+					fill(25*i, 25*i, 25*i);
+					rect(50+60*i, height-50, w, -rainfall[i]);
+				}
+				
 				break;
 			case 1: 
 				break;
@@ -112,4 +131,4 @@ public class Arrays extends PApplet
 				break;
 		}
 
-}
+}}
