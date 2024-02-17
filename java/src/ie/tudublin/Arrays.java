@@ -8,7 +8,7 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
+	float[] rainfall = {40, 120, 86, 224, 200, 174, 112, 80, 124, 222, 200, 80};
 
 	int mode = 0;
 
@@ -132,13 +132,19 @@ public class Arrays extends PApplet
 				fill(255, 255, 255);
 				line(50, 50, 50, height - 50);
 				line(50, height - 50, width - 50, height - 50);
-				for (int i = 0; i < 12; i++) {
+				for (int i = 0; i < months.length; i++) {
 					text(months[i], (70+ (special_num * i)), height - 25);
 				}
 
-				for (int i = 0; i < 13; i++) {
+				for (int i = 0; i < months.length + 1; i++) {
 					text((i * 10), 25 , (height - (i * special_num) - 50));
 					line(45, (height - (i * special_num) - 50) , 50, (height - (i * special_num) - 50));
+				}
+
+				line(50,( height - (50 + rainfall[0])), (special_num)  + (special_num/2),  (height - (50 + rainfall[1])));
+
+				for (int i = 1; i < months.length - 1; i++) {
+					line((special_num * i) + (special_num/2),( height - (50 + rainfall[i])), (special_num * (i + 1))  + (special_num/2),  (height - (50 + rainfall[i+1])));
 				}
 				
 				break;
