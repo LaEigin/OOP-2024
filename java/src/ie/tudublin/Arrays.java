@@ -12,6 +12,8 @@ public class Arrays extends PApplet
 
 	int mode = 0;
 
+	int special_num = 700/12;
+
 	public float map1(float a, float b, float c, float d, float e)
 	{
 		float r1 = c -b;
@@ -114,7 +116,7 @@ public class Arrays extends PApplet
 		
 					text(months[i], 65+60*i, height-10);
 					line(50, height-50, 50, 50);
-					text(10*i, 25, height - (i*(58) - 58));
+					text(10*i, 25, height - (i*(58) + 56));
 					line(45, height - (i*(58) - 58) , 50, height - (i*(58) - 58));
 				}
 
@@ -126,9 +128,23 @@ public class Arrays extends PApplet
 				
 				break;
 			case 1: 
+				background(0);
+				fill(255, 255, 255);
+				line(50, 50, 50, height - 50);
+				line(50, height - 50, width - 50, height - 50);
+				for (int i = 0; i < 12; i++) {
+					text(months[i], (70+ (special_num * i)), height - 25);
+				}
+
+				for (int i = 0; i < 13; i++) {
+					text((i * 10), 25 , (height - (i * special_num) - 50));
+					line(45, (height - (i * special_num) - 50) , 50, (height - (i * special_num) - 50));
+				}
+				
 				break;
 			case 2:
 				break;
 		}
 
-}}
+	}
+}
