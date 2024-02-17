@@ -10,6 +10,8 @@ public class Arrays extends PApplet
 
 	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
 
+	int mode = 0;
+
 	public float map1(float a, float b, float c, float d, float e)
 	{
 		float r1 = c -b;
@@ -24,6 +26,13 @@ public class Arrays extends PApplet
 		for (int i = 0; i < rainfall.length; i++) {
 			rainfall[i] = random(500);
 		}
+	}
+
+	public void keyPressed() {
+		if (key >= '0' && key <= '9') {
+			mode = key - '0';
+		}
+		println(mode);
 	}
 
 	public void settings()
@@ -94,23 +103,13 @@ public class Arrays extends PApplet
 	
 	public void draw()
 	{	
-
-		background(0);
-		float w = width / (float)months.length - 5;
-		for(int i = 0 ; i < months.length ;  i ++)
-		{
-			fill(255, 255, 255);
-			stroke(255,255,255);
-
-			text(months[i], 65+60*i, height-10);
-			line(50, height-50, 50, 50);
-			text(10*i, 25, height - (i*(58) - 58));
-			line(45, height - (i*(58) - 58) , 50, height - (i*(58) - 58));
+		switch (mode) {
+			case 0:
+				break;
+			case 1: 
+				break;
+			case 2:
+				break;
 		}
 
-		for (int i = 0; i < months.length; i++) {
-			fill(25*i, 25*i, 25*i);
-			rect(50+60*i, height-50, w, -rainfall[i]);
-		}
-	}
 }
