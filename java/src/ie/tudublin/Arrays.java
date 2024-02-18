@@ -8,7 +8,7 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {40, 120, 86, 224, 200, 174, 112, 80, 124, 222, 200, 80};
+	float[] rainfall = {40, 120, 86, 224, 200, 174, 112, 80, 124, 111, 100, 90};
 
 	int mode = 0;
 
@@ -149,6 +149,10 @@ public class Arrays extends PApplet
 				
 				break;
 			case 2:
+				background(0);
+				stroke(255, 255, 255);
+				circle(width/2, height/2, 400);
+				arc
 				break;
 		}
 
