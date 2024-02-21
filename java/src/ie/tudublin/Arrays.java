@@ -151,8 +151,9 @@ public class Arrays extends PApplet
 			case 2:
 				background(0);
 				stroke(255, 255, 255);
-				circle(width/2, height/2, 400);
-				arc
+				fill(255);
+				//circle(width/2, height/2, 400);
+				arc(50,50,50,50,50,50);
 				break;
 		}
 
