@@ -8,11 +8,20 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {40, 120, 86, 224, 200, 174, 112, 80, 124, 111, 100, 90};
+	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
+
 
 	int mode = 0;
 
-	int special_num = 700/12;
+	int minIndex = 0;
+    int maxIndex  = 0;
+
+    public void keyPressed() {
+		if (key >= '0' && key <= '9') {
+			mode = key - '0';
+		}
+		println(mode);
+	}
 
 	public float map1(float a, float b, float c, float d, float e)
 	{
@@ -30,18 +39,12 @@ public class Arrays extends PApplet
 		}
 	}
 
-	public void keyPressed() {
-		if (key >= '0' && key <= '9') {
-			mode = key - '0';
-		}
-		println(mode);
-	}
-
 	public void settings()
 	{
-		size(800, 800);
+		size(500, 500);
 
 		String[] m1 = months;
+		months[0] = "XXX";
 		print(m1[0]);
 		for(int i = 0; i < months.length; i ++)
 		{
@@ -95,8 +98,8 @@ public class Arrays extends PApplet
 	}
 
 	public void setup() {
-		colorMode(RGB);
-		background(255,255,255);
+		colorMode(HSB);
+		background(0);
 		randomize();
 		
 		
@@ -104,58 +107,91 @@ public class Arrays extends PApplet
 
 	
 	public void draw()
-	{	
-		switch (mode) {
-			case 0:
-				background(0);
-				float w = width / (float)months.length - 5;
-				for(int i = 0 ; i < months.length ;  i ++)
-				{
-					fill(255, 255, 255);
-					stroke(255,255,255);
-		
-					text(months[i], 65+60*i, height-10);
-					line(50, height-50, 50, 50);
-					text(10*i, 25, height - (i*(58) + 56));
-					line(45, height - (i*(58) - 58) , 50, height - (i*(58) - 58));
-				}
-
-
-				for (int i = 0; i < months.length; i++) {
-					fill(25*i, 25*i, 25*i);
-					rect(50+60*i, height-50, w, -rainfall[i]);
-				}
-				
-				break;
-			case 1: 
-				background(0);
-				fill(255, 255, 255);
-				line(50, 50, 50, height - 50);
-				line(50, height - 50, width - 50, height - 50);
-				for (int i = 0; i < months.length; i++) {
-					text(months[i], (70+ (special_num * i)), height - 25);
-				}
-
-				for (int i = 0; i < months.length + 1; i++) {
-					text((i * 10), 25 , (height - (i * special_num) - 50));
-					line(45, (height - (i * special_num) - 50) , 50, (height - (i * special_num) - 50));
-				}
-
-				line(50,( height - (50 + rainfall[0])), (special_num)  + (special_num/2),  (height - (50 + rainfall[1])));
-
-				for (int i = 1; i < months.length - 1; i++) {
-					line((special_num * i) + (special_num/2),( height - (50 + rainfall[i])), (special_num * (i + 1))  + (special_num/2),  (height - (50 + rainfall[i+1])));
-				}
-				
-				break;
-			case 2:
-				background(0);
-				stroke(255, 255, 255);
+	{
+	switch (mode) {
+		case 0:
+		{
+			background(0);
+			colorMode(HSB);
+			float w = width / (float)rainfall.length;
+			noStroke();
+			for(int i = 0 ; i < rainfall.length ; i ++)
+			{
+				float x = map(i, 0, rainfall.length, 0, width);
+				int c = (int)map(i, 0, rainfall.length, 0, 255);
+				fill(c, 255, 255);
+				float h = map(rainfall[i], 0, rainfall[maxIndex], 0, -height);
+				rect(x, height, w, h);
 				fill(255);
-				//circle(width/2, height/2, 400);
-				arc(50,50,50,50,50,50);
-				break;
+				textAlign(CENTER, CENTER);
+				text(months[i], x + (w / 2), height - 50);
+			}
+			break;
 		}
+		case 1:
+		{
+			background(0);
+			float border = width * 0.1f;
+			// Draw the axis
+			stroke(255);
+			line(border, border, border, height - border);
+			line(border, height - border, width - border, height - border);
+			for(int i = 0 ; i <= 120; i += 10)
+			{
+				float y = map(i, 0, 120, height - border, border);
+				line(border - 5, y, border, y);
+				fill(255);
+				textAlign(CENTER, CENTER);
+				text(i, border / 2, y);
+			}
+			float w = (width - (border * 2.0f)) / (float)rainfall.length;
+			
+			for(int i = 0 ; i < rainfall.length; i ++)
+			{
+				float x = map(i, 0, rainfall.length, border, width-border);
+				float c = map(i, 0, rainfall.length, 0, 255);
+				stroke(255);
+				fill(c, 255, 255);
+				float h = map(rainfall[i], 0, 120, 0, -height + (border * 2.0f)); 
+				rect(x, height-border, w, h);
+				fill(255);
+				text(months[i], x + (w / 2), height - (border / 2));
 
+			}
+			break;
+		}
+		case 2:
+			background(0);
+			float r = mouseX;
+			float cx = width / 2;
+			float cy = height / 2;
+			stroke(255);
+			noFill();
+			//circle(cx, cy, r * 2.0f);
+			float tot = 0;
+			for(float f:rainfall)
+			{
+				tot += f;
+			}
+			float start = 0;
+			for(int i = 0 ; i < rainfall.length ; i ++)
+			{
+				float val = map(rainfall[i], 0, tot, 0, TWO_PI);
+				float c = map(i, 0, rainfall.length, 0, 255);
+				noStroke();
+				fill(c, 255, 255);
+				arc(cx, cy, r * 2, r * 2, start, start + val, PIE);
+				
+				float theta = start + (val * 0.5f);
+				float x = cx + cos(theta) * (r * 1.2f);
+				float y = cy + sin(theta) * (r * 1.2f);
+				fill(255);
+				text(months[i], x, y);
+				start = start + val;
+				
+			}
+
+			break;
+		}   
 	}
 }
