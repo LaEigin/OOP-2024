@@ -8,7 +8,7 @@ public class YASC extends PApplet
 
     public void setup()
     {
-        player = new Player(this, width / 2, height / 2, 0, 0, 100);
+        player = new Player(this, 0, 0, 0, 0, 100);
     }
 
     public void settings()
@@ -18,6 +18,7 @@ public class YASC extends PApplet
 
     public void draw()
     {
+        background(0);
         player.render();
     }
 }

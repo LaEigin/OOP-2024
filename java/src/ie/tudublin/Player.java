@@ -53,7 +53,40 @@ public class Player {
 
     public void render()
     {
-        yasc.circle(pos.x, pos.y, width);
+        if (yasc.keyPressed)
+        {
+            
+            if (yasc.keyCode == yasc.LEFT)
+            {
+                rotation -= 0.1f;
+            }
+
+            if (yasc.keyCode == yasc.RIGHT)
+            {
+                rotation += 0.1f;
+            }
+
+            if (yasc.keyCode == yasc.UP)
+            {
+                pos.y = pos.y - 1;
+            }
+
+            if (yasc.keyCode == yasc.DOWN)
+            {
+                pos.y = pos.y + 1;
+            }
+
+            
+        }
+        // yasc.circle(pos.x, pos.y, width);
+        yasc.stroke(255);
+        yasc.translate(pos.x, pos.y);
+        yasc.rotate(rotation);        
+        yasc.line(- halfW, halfW, 0, - halfW);
+        yasc.line(0, - halfW, halfW, halfW);
+        yasc.line(halfW, halfW, 0, 0);
+        yasc.line(0, 0, - halfW, halfW);
+           
     }
     
 }
